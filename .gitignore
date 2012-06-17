@@ -1,0 +1,11 @@
+*~
+*.o
+*.d
+*.a
+*.so
+*.so.*
+*.la
+*.commit
+*.rpm
+cscope.*
+tags

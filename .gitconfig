@@ -1,0 +1,15 @@
+[user]
+	name = Li Xinjie
+	email = xjason.li@gmail.com
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+[color]
+	branch = auto
+	interactive = auto
+	status = auto
+	diff = auto
+[core]
+	excludesfile = ~/.gitignore
