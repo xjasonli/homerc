@@ -131,10 +131,8 @@ if which screen > /dev/null 2>&1; then
     alias screen='screen -U'
 fi
 
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 if [ -f ~/.rvm/scripts/rvm ]; then
     source ~/.rvm/scripts/rvm
+    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 fi
 

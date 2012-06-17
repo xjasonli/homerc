@@ -1,4 +1,5 @@
 *~
+*.un~
 *.o
 *.d
 *.a
@@ -7,5 +8,19 @@
 *.la
 *.commit
 *.rpm
+*.tar
+*.gz
+*.bz2
+*.deb
+*.sw?
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+.netrwhist
+.svn
 cscope.*
 tags
+TAGS
+Thumbs.db
+Desktop.ini

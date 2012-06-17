@@ -16,7 +16,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 call pathogen#helptags()
 
-" Encoding auto detecting
+" File encoding
 if has("win32") || has("win64")
     set encoding=chinese
     set fileencoding=chinese
@@ -139,7 +139,7 @@ set noswapfile
 set mouse=
 
 " Highlighting the current line
-if has('+cursorline')
+if exists('+cursorline')
     set cursorline
 endif
 
@@ -177,7 +177,7 @@ nmap <leader>ww :w!<cr>
 nmap <leader>wa :wa!<cr>
 nmap <leader>w! :w !sudo tee % >/dev/null<cr><cr>
 
-" Mapping - tab switching
+" Mapping - buffer switching
 nmap <c-n> :bn<cr>
 nmap <c-p> :bp<cr>
 
@@ -214,19 +214,19 @@ autocmd FileType c,cpp,java,php,js,python,twig,xml,yml
 
 " Plugin - minibufexpl
 let g:miniBufExplorerMoreThanOne=1
-let g:miniBufExplModSelTarget = 1
+let g:miniBufExplModSelTarget=1
 let g:miniBufExplTabWrap=1
 let g:miniBufExplMapWindowNavVim=1
 let g:miniBufExplMapCTabSwitchBufs=1
 
 " Plugin - a.vim
 nmap <leader>a :A<cr>
+let g:alternateNoDefaultAlternate=1
 let g:alternateExtensions_h="c,cpp,cxx,cc,CC,inl,m"
 let g:alternateExtensions_H="C,CPP,CXX,CC,INL"
 let g:alternateExtensions_inl="h,hh,hpp"
 let g:alternateExtensions_INL="H,HH,HPP"
 let g:alternateExtensions_m="h"
-let g:alternateNoDefaultAlternate=1
 
 " Plugin - TagBar
 nmap <leader>t :TagbarToggle<cr>
