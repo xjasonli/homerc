@@ -205,6 +205,7 @@ nmap <silent> <leader>/ :nohls<cr>
 " Mapping - visual shifting (does not exit visual mode)
 vnoremap < <gv
 vnoremap > >gv
+vnoremap = =gv
 
 " Remove trailing whitespace and ^M chars
 "autocmd FileType c,cpp,java,php,js,python,twig,xml,yml
