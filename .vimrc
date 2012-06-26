@@ -120,7 +120,7 @@ set foldlevel=100
 set backup
 set writebackup
 set backupdir=~/.tmp,/tmp
-set undofile
+set noundofile
 set undodir=~/.tmp,/tmp
 set undolevels=1000
 set undoreload=10000
