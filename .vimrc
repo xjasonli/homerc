@@ -235,10 +235,6 @@ nmap <leader>t :TagbarToggle<cr>
 nmap <leader>n :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\.pyc$', '\~$']
 
-" Plugin - YankRing
-let g:yankring_persist=0
-let g:yankring_history_dir='~/.tmp'
-
 " Cscope
 if has('quickfix')
     set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
