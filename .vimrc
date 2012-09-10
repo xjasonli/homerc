@@ -50,12 +50,10 @@ set autoread
 " Displaying
 set number
 set nowrap
-set linebreak
 set linespace=0
-set textwidth=80
-if exists('+colorcolumn')
-    set colorcolumn=+1
-elseif exists('*matchadd')
+set textwidth=0
+set nolinebreak
+if exists('*matchadd')
     au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 else
     highlight OverLength ctermbg=darkgray guibg=darkgray
