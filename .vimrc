@@ -6,15 +6,16 @@
 " No Vi-compatible
 set nocompatible
 
-" Filetype detecting
-filetype plugin indent on
-" Sytax highlighting
-syntax on
-
 " Pathogen support
 runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
+"call pathogen#infect()
+call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+
+" Sytax highlighting
+syntax on
+" Filetype detecting
+filetype plugin indent on
 
 " File encoding
 if has("win32") || has("win64")
