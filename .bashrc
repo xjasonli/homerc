@@ -30,7 +30,7 @@ else
 fi
 
 # Some env variables
-export PATH=$HOME/bin:$PATH:/usr/local/sbin:/sbin:/usr/sbin
+export PATH=/home/s/bin/:$HOME/bin:$PATH:/usr/local/sbin:/sbin:/usr/sbin
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/lib/pkgconfig
 export LD_LIBRARY_PATH=${HOME}/lib64:${HOME}/lib
 

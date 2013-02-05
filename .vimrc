@@ -219,8 +219,10 @@ let g:miniBufExplMapCTabSwitchBufs=1
 nmap <leader>a :A<cr>
 let g:alternateNoDefaultAlternate=1
 let g:alternateExtensions_h="c,cpp,cxx,cc,CC,inl,m"
+let g:alternateExtensions_hh="cc,cpp,cxx,CC,inl,m"
 let g:alternateExtensions_H="C,CPP,CXX,CC,INL"
 let g:alternateExtensions_inl="h,hh,hpp"
+let g:alternateExtensions_cc="h,hh,hpp"
 let g:alternateExtensions_INL="H,HH,HPP"
 let g:alternateExtensions_m="h"
 
