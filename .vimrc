@@ -207,7 +207,35 @@ vnoremap = =gv
 "    \ autocmd BufWritePre <buffer>
 "    \ :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
+" File-skeleton
+let g:skeletonAuthor = 'Li Xinjie'
+let g:skeletonEmail = 'xjason.li@gmail.com'
+function! ReplaceSkeletonFields()
+    let n = min([20, line("$")])
+    keepjumps exe '1,' . n . 's#<DATE>#\1' .  strftime('%F') . '#e'
+    keepjumps exe '1,' . n . 's#<DATETIME>#\1' .  strftime('%F %T') . '#e'
+    keepjumps exe '1,' . n . 's#<FILENAME>#' .  expand('%:t') . '#e'
+    keepjumps exe '1,' . n . 's#<E-MAIL>#\1' .  g:skeletonEmail . '#e'
+    keepjumps exe '1,' . n . 's#<AUTHOR>#\1' . g:skeletonAuthor . '#e'
+    " call histdel('search', -1)
+    exec "normal G"
+endfun
+function! InsertSkeleton()
+    if has("win32") || has ('win64')
+        let $VIMHOME = $HOME."/vimfiles/"
+    else
+        let $VIMHOME = $HOME."/.vim/"
+    endif
+    let skeletonFile = $VIMHOME."/skeletons/".&ft
+    if (filereadable(skeletonFile))
+      exec ":0r ".skeletonFile | call ReplaceSkeletonFields()
+    endif
+endfun
+au BufNewFile * :silent! call InsertSkeleton()
 
+"""
+""" Plugins
+"""
 " Plugin - minibufexpl
 let g:miniBufExplorerMoreThanOne=1
 let g:miniBufExplModSelTarget=1
