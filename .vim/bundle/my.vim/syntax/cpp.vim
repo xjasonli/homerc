@@ -277,3 +277,9 @@ if version >= 508 || !exists("did_cpp_syntax_inits")
   delcommand HiLink
 endif
 
+if exists('*matchadd')
+    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+else
+    highlight OverLength ctermbg=darkgray guibg=darkgray
+    match OverLength /\%81v.\+/
+endif
