@@ -1,0 +1,85 @@
+#!/bin/bash
+
+usage() {
+    echo "Usage: `basename $0` [scp-options] [[user@]src-host1:]src-file1 [...] -- [[user@]dst-host1:]dst-file1 [...]"
+    echo
+}
+
+args=()
+srcs=()
+dsts=()
+failed=()
+while getopts "1246BCpqrvc:F:i:l:o:P:S:" option; do
+    case $option in
+        [1246BCpqrv])
+            index=${#args[@]}
+            args[$index]="-$option"
+            ;;
+        [cFiloPS])
+            index=${#args[@]}
+            args[$index]="-$option"
+            args[$(($index+1))]="$OPTARG"
+            ;;
+        [?])
+            usage
+            exit -1
+            ;;
+        *)
+            usage
+            exit -1
+    esac
+done
+shift $(($OPTIND-1))
+
+while test $# -gt 0; do
+    case "$1" in
+        --)
+            shift
+            break
+            ;;
+        *)
+            index=${#srcs[@]}
+            srcs[$index]=$1
+        ;;
+    esac
+    shift
+done
+
+dsts=()
+while test $# -gt 0; do
+    index=${#dsts[@]}
+    dsts[$index]=$1
+    shift
+done
+
+if [ ${#srcs[@]} -eq 0 ] || [ ${#dsts[@]} -eq 0 ]; then
+    echo >&2 "$0: illegal options -- no source-file or destination-file to copy"
+    usage
+    exit 1
+fi
+
+for ((i=0; i<${#dsts[@]}; i++)); do
+    echo "[01;32m*" scp "${args[@]}" "${srcs[@]}" "${dsts[$i]}" "[00m"
+    scp "${args[@]}" "${srcs[@]}" "${dsts[$i]}"
+    if [ $? -ne 0 ]; then
+        index=${#failed[@]}
+        failed[$index]=${dsts[$i]}
+    fi
+done
+
+echo -n "[01;33m* Total ${#dsts[@]} tasks, "
+if [ ${#failed[@]} -eq 0 ]; then
+    echo -n "all succeed"
+    echo "[00m"
+    echo
+    exit 0
+else
+    echo -n "${#failed[@]} failed"
+    echo "[00m"
+    echo "[01;31m* Failed:"
+    for ((i=0; i<${#failed[@]}; i++)); do
+        echo "* # ${failed[$i]}"
+    done
+    echo "[00m" 
+    exit ${#failed[@]}
+fi

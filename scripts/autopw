@@ -1,0 +1,71 @@
+#!/usr/bin/env expect
+proc respond { pw } {
+  global pws
+  if {![info exists pws($pw)]} {
+    send_user " (autopw) "
+    stty -echo
+    expect_user -re "(.+)\n"
+    stty echo
+    set pws($pw) \
+      [exec perl -ne "print pack(q{u}, \$_)" << $expect_out(1,string)]
+  } else {
+    send_user " (autopw'ed)"
+  }
+  log_user 0
+  send -- "[exec perl -ne "print unpack(q{u}, \$_)" << $pws($pw)]\n";
+  log_user 1
+}
+
+## main ()
+
+set timeout -1
+global pws
+
+eval spawn -noecho $argv
+
+expect {
+  "password for lixinjie:" {
+    respond system
+    exp_continue
+  }
+  "assword:" {
+    respond system
+    exp_continue
+  }
+  "Enter passphrase for " {
+    respond ssh
+    exp_continue
+  }
+  "Bad passphrase, try again" {
+    unset pws(ssh)
+    respond ssh
+    exp_continue
+  }
+  "Enter PEM pass phrase:" {
+    respond pem
+    exp_continue
+  }
+  "Enter passphrase: " {
+    respond gpg
+    exp_continue
+  }
+  "y,n,?" {
+    send -- "y\n"
+    exp_continue
+  }
+  "(y/n)?" {
+    send -- "y\n"
+    exp_continue
+  }
+  "?,??,q" {
+    send -- "\n"
+    exp_continue
+  }
+  "(yes/no)?" {
+    send -- "yes\n"
+    exp_continue
+  }
+  eof {
+    exit
+  }
+}

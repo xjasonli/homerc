@@ -1,0 +1,93 @@
+#!/bin/bash
+
+usage() {
+    echo "Usage: `basename $0` [ssh-options] [user@]host1 [...] -- command"
+    echo
+}
+
+args=()
+host=()
+cmds=()
+failed=()
+while getopts "1246AaCfgkMNnqsTtVvXxYc:e:F:i:l:m:O:o:p:S:W:" option; do
+    case $option in
+        [1246AaCfgKkMNnqsTtVvXxYy])
+            index=${#args[@]}
+            args[$index]="-$option"
+            ;;
+        [ceFilmOopSW])
+            index=${#args[@]}
+            args[$index]="-$option"
+            args[$(($index+1))]="$OPTARG"
+            ;;
+        [?])
+            usage
+            exit -1
+            ;;
+        *)
+            usage
+            exit -1
+    esac
+done
+shift $(($OPTIND-1))
+
+while test $# -gt 0; do
+    case "$1" in
+        --)
+            shift
+            break
+            ;;
+        *)
+            index=${#host[@]}
+            host[$index]=$1
+            ;;
+    esac
+    shift
+done
+
+while test $# -gt 0; do
+    index=${#cmds[@]}
+    cmds[$index]=$1
+    shift
+done
+
+if [ ${#host[@]} -eq 0 ] || [ ${#cmds[@]} -eq 0 ]; then
+    echo >&2 "$0: illegal options -- no host or command to execute"
+    usage
+    exit -1
+fi
+
+# Add -t if sudo command exists
+if [ $(echo "${cmds[@]}" | grep -c sudo) != "0" ]; then
+    if [ $(echo "${cmds[@]}" | grep -c '\b-t\b') == "0" ]; then
+        index=${#args[@]}
+        args[$index]=-t
+    fi
+fi
+
+for ((i=0; i<${#host[@]}; i++)); do
+    echo "[01;32m*" ssh "${args[@]}" "${host[$i]}" "${cmds[@]}" "[00m"
+    ssh "${args[@]}" "${host[$i]}" "${cmds[@]}"
+    if [ $? -ne 0 ]; then
+        index=${#failed[@]}
+        failed[$index]=${host[$i]}
+    fi
+done
+
+echo -n "[01;33m* Total ${#host[@]} tasks, "
+if [ ${#failed[@]} -eq 0 ]; then
+    echo -n "all succeed"
+    echo "[00m"
+    echo
+    exit 0
+else
+    echo -n "${#failed[@]} failed"
+    echo "[00m"
+    echo "[01;31m* Failed:"
+    for ((i=0; i<${#failed[@]}; i++)); do
+        echo "* # ${failed[$i]}"
+    done
+    echo "[00m"
+    exit ${#failed[@]}
+fi
+
