@@ -6,16 +6,15 @@ else
     SRCDIR=$(dirname $(readlink -f $0))
 fi
 
-pushd ${SRCDIR} >/dev/null
+cd ${SRCDIR}
 git submodule update --init
-popd >/dev/null
 
-for x in ${SRCDIR}/configs/*; do
+for x in configs/*; do
     FILE=$(basename $x)
     rm -rf ${HOME}/.${FILE}
     cp -r ${x} ${HOME}/.${FILE}
 done
 
 mkdir -p ${HOME}/bin/
-cp -f ${SRCDIR}/scripts/* ${HOME}/bin/
+cp -f scripts/* ${HOME}/bin/
 
