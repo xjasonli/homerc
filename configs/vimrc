@@ -6,13 +6,9 @@
 " No Vi-compatible
 set nocompatible
 
-" Pathogen support
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#incubate()
-call pathogen#helptags()
-
 " Sytax highlighting
 syntax on
+
 " Filetype detecting
 filetype plugin indent on
 
@@ -37,7 +33,6 @@ set fileformats=unix,dos,mac
 set expandtab
 set smarttab
 set tabstop=4
-set softtabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
@@ -200,68 +195,77 @@ vnoremap = =gv
 "    \ autocmd BufWritePre <buffer>
 "    \ :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
-" File-skeleton
-let g:skeletonAuthor = 'Li Xinjie'
-let g:skeletonEmail = 'xjason.li@gmail.com'
-function! ReplaceSkeletonFields()
-    let n = min([20, line("$")])
-    keepjumps exe '1,' . n . 's#<DATE>#\1' .  strftime('%F') . '#e'
-    keepjumps exe '1,' . n . 's#<DATETIME>#\1' .  strftime('%F %T') . '#e'
-    keepjumps exe '1,' . n . 's#<FILENAME>#' .  expand('%:t') . '#e'
-    keepjumps exe '1,' . n . 's#<E-MAIL>#\1' .  g:skeletonEmail . '#e'
-    keepjumps exe '1,' . n . 's#<AUTHOR>#\1' . g:skeletonAuthor . '#e'
-    " call histdel('search', -1)
-    exec "normal G"
-endfun
-function! InsertSkeleton()
-    if has("win32") || has ('win64')
-        let $VIMHOME = $HOME."/vimfiles/"
-    else
-        let $VIMHOME = $HOME."/.vim/"
-    endif
-    let skeletonFile = $VIMHOME."/skeletons/".&ft
-    if (filereadable(skeletonFile))
-      exec ":0r ".skeletonFile | call ReplaceSkeletonFields()
-    endif
-endfun
-au BufNewFile * :silent! call InsertSkeleton()
-
 """
 """ Plugins
 """
-" Plugin - minibufexpl
-let g:miniBufExplorerMoreThanOne=1
-let g:miniBufExplModSelTarget=1
-let g:miniBufExplTabWrap=1
-let g:miniBufExplMapWindowNavVim=1
-let g:miniBufExplMapCTabSwitchBufs=1
-
-" Plugin - a.vim
-nmap <leader>a :A<cr>
-let g:alternateNoDefaultAlternate=1
-let g:alternateExtensions_h="c,cpp,cxx,cc,CC,inl,m"
-let g:alternateExtensions_hh="cc,cpp,cxx,CC,inl,m"
-let g:alternateExtensions_H="C,CPP,CXX,CC,INL"
-let g:alternateExtensions_inl="h,hh,hpp"
-let g:alternateExtensions_cc="h,hh,hpp"
-let g:alternateExtensions_INL="H,HH,HPP"
-let g:alternateExtensions_m="h"
-
-" Plugin - TagBar
-nmap <leader>t :TagbarToggle<cr>
-
-" Plugin - NERDTree
-nmap <leader>n :NERDTreeToggle<cr>
-let NERDTreeIgnore=['\.pyc$', '\~$']
-
-" Cscope
-if has('quickfix')
-    set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
+if has("win32") || has ('win64')
+    let runtimePath = $HOME."/vimfiles/"
+else
+    let runtimePath = $HOME."/.vim/"
 endif
 
-" Other filetypes
-augroup filetype
-	au! BufRead,BufNewFile *.thrift set filetype=thrift
-	au! BufRead,BufNewFile *.proto set filetype=proto
-	au! BufRead,BufNewFile *.ipp set filetype=cpp
-augroup end
+" Pathogen support
+let pathogenPath = "bundle/vim-pathogen/autoload/pathogen.vim"
+if (filereadable(runtimePath . pathogenPath))
+    runtime bundle/vim-pathogen/autoload/pathogen.vim
+    call pathogen#infect()
+    call pathogen#helptags()
+
+    " File-skeleton
+    let g:skeletonAuthor = 'Li Xinjie'
+    let g:skeletonEmail = 'xjason.li@gmail.com'
+    function! ReplaceSkeletonFields()
+        let n = min([20, line("$")])
+        keepjumps exe '1,' . n . 's#<DATE>#\1' .  strftime('%F') . '#e'
+        keepjumps exe '1,' . n . 's#<DATETIME>#\1' .  strftime('%F %T') . '#e'
+        keepjumps exe '1,' . n . 's#<FILENAME>#' .  expand('%:t') . '#e'
+        keepjumps exe '1,' . n . 's#<E-MAIL>#\1' .  g:skeletonEmail . '#e'
+        keepjumps exe '1,' . n . 's#<AUTHOR>#\1' . g:skeletonAuthor . '#e'
+        " call histdel('search', -1)
+        exec "normal G"
+    endfun
+    function! InsertSkeleton()
+        let skeletonFile = runtimePath ."/skeletons/". &ft
+        if (filereadable(skeletonFile))
+          exec ":0r ".skeletonFile | call ReplaceSkeletonFields()
+        endif
+    endfun
+    au BufNewFile * :silent! call InsertSkeleton()
+
+    " Plugin - minibufexpl
+    let g:miniBufExplorerMoreThanOne=1
+    let g:miniBufExplModSelTarget=1
+    let g:miniBufExplTabWrap=1
+    let g:miniBufExplMapWindowNavVim=1
+    let g:miniBufExplMapCTabSwitchBufs=1
+
+    " Plugin - a.vim
+    nmap <leader>a :A<cr>
+    let g:alternateNoDefaultAlternate=1
+    let g:alternateExtensions_h="c,cpp,cxx,cc,CC,inl,m"
+    let g:alternateExtensions_hh="cc,cpp,cxx,CC,inl,m"
+    let g:alternateExtensions_H="C,CPP,CXX,CC,INL"
+    let g:alternateExtensions_inl="h,hh,hpp"
+    let g:alternateExtensions_cc="h,hh,hpp"
+    let g:alternateExtensions_INL="H,HH,HPP"
+    let g:alternateExtensions_m="h"
+
+    " Plugin - TagBar
+    nmap <leader>t :TagbarToggle<cr>
+
+    " Plugin - NERDTree
+    nmap <leader>n :NERDTreeToggle<cr>
+    let NERDTreeIgnore=['\.pyc$', '\~$']
+
+    " Cscope
+    if has('quickfix')
+        set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
+    endif
+
+    " Other filetypes
+    augroup filetype
+        au! BufRead,BufNewFile *.thrift set filetype=thrift
+        au! BufRead,BufNewFile *.proto set filetype=proto
+        au! BufRead,BufNewFile *.ipp set filetype=cpp
+    augroup end
+endif
