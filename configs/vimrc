@@ -208,7 +208,7 @@ endif
 let pathogenPath = "bundle/vim-pathogen/autoload/pathogen.vim"
 if (filereadable(runtimePath . pathogenPath))
     runtime bundle/vim-pathogen/autoload/pathogen.vim
-    call pathogen#infect()
+    call pathogen#incubate()
     call pathogen#helptags()
 
     " File-skeleton
