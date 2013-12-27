@@ -9,12 +9,17 @@ fi
 cd ${SRCDIR}
 git submodule update --init
 
-for x in configs/*; do
+for x in ${SRCDIR}/configs/*; do
     FILE=$(basename $x)
     rm -rf ${HOME}/.${FILE}
-    cp -r ${x} ${HOME}/.${FILE}
+    echo "Copying $x -> ${HOME}/.${FILE}"
+    cp -r $x ${HOME}/.${FILE}
 done
 
 mkdir -p ${HOME}/bin/
-cp -f scripts/* ${HOME}/bin/
+for x in ${SRCDIR}/scripts/*; do
+    FILE=$(basename $x)
+    echo "Copying $x -> ${HOME}/bin/${FILE}"
+    cp -f $x ${HOME}/bin/
+done
 
