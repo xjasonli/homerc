@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 
-git submodule update --init
-
 if which realpath > /dev/null 2>&1; then
-    SRCDIR=$(realpath $0)
+    SRCDIR=$(dirname $(realpath $0))
 else
-    SRCDIR=$(readlink -f $0)
+    SRCDIR=$(dirname $(readlink -f $0))
 fi
+
+pushd ${SRCDIR} >/dev/null
+git submodule update --init
+popd >/dev/null
 
 for x in ${SRCDIR}/configs/*; do
     FILE=$(basename $x)
     rm -rf ${HOME}/.${FILE}
-    cp -r ${FILE} ${HOME}/.${FILE}
+    cp -r ${x} ${HOME}/.${FILE}
 done
 
 mkdir -p ${HOME}/bin/
