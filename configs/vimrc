@@ -233,11 +233,8 @@ if (filereadable(runtimePath . pathogenPath))
     au BufNewFile * :silent! call InsertSkeleton()
 
     " Plugin - minibufexpl
-    let g:miniBufExplorerMoreThanOne=1
-    let g:miniBufExplModSelTarget=1
+    let g:miniBufExplBuffersNeeded = 1
     let g:miniBufExplTabWrap=1
-    let g:miniBufExplMapWindowNavVim=1
-    let g:miniBufExplMapCTabSwitchBufs=1
 
     " Plugin - a.vim
     nmap <leader>a :A<cr>
