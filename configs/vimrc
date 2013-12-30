@@ -199,14 +199,14 @@ vnoremap = =gv
 """ Plugins
 """
 if has("win32") || has ('win64')
-    let runtimePath = $HOME."/vimfiles/"
+    let g:vimPath = $HOME."/vimfiles/"
 else
-    let runtimePath = $HOME."/.vim/"
+    let g:vimPath = $HOME."/.vim/"
 endif
 
 " Pathogen support
 let pathogenPath = "bundle/vim-pathogen/autoload/pathogen.vim"
-if (filereadable(runtimePath . pathogenPath))
+if (filereadable(g:vimPath . pathogenPath))
     runtime bundle/vim-pathogen/autoload/pathogen.vim
     call pathogen#incubate()
     call pathogen#helptags()
@@ -225,7 +225,7 @@ if (filereadable(runtimePath . pathogenPath))
         exec "normal G"
     endfun
     function! InsertSkeleton()
-        let skeletonFile = runtimePath ."/skeletons/". &ft
+        let skeletonFile = g:vimPath ."/skeletons/". &ft
         if (filereadable(skeletonFile))
           exec ":0r ".skeletonFile | call ReplaceSkeletonFields()
         endif
