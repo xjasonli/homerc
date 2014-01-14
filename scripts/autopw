@@ -24,7 +24,7 @@ global pws
 eval spawn -noecho $argv
 
 expect {
-  "password for lixinjie:" {
+  "assword for " {
     respond system
     exp_continue
   }
