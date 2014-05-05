@@ -69,6 +69,7 @@ elif [ $(uname) = Darwin ]; then
     if [ -f /opt/local/etc/bash_completion ]; then
         . /opt/local/etc/bash_completion
     fi
+    PATH=/opt/local/bin:/opt/local/sbin:$PATH
 fi
 
 alias grep='grep --color=auto'
