@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 
-if which realpath > /dev/null 2>&1; then
-    SRCDIR=$(dirname $(realpath $0))
+UNAME=$(uname -s)
+
+if [ $UNAME = Linux ]; then
+    SRCDIR=$(dirname "$(readlink -f "$0")")
+elif [ $UNAME = FreeBSD ]; then
+    SRCDIR=$(dirname "$(realpath "$0")")
+elif [ $UNAME = Darwin ]; then
+    SRCDIR=$(cd "$(dirname "$0")"; pwd)
 else
-    SRCDIR=$(dirname $(readlink -f $0))
+    echo "Unknown platform"
+    exit 1
 fi
 
 cd ${SRCDIR}
