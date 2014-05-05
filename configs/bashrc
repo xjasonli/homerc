@@ -19,30 +19,6 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
-# Some env variables
-export PATH=$HOME/bin:$PATH
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/lib/pkgconfig
-export LD_LIBRARY_PATH=${HOME}/lib64:${HOME}/lib
-
-export EDITOR=vim
-export SVN_EDITOR=vim
-export GIT_EDITOR=vim
-export PAGER="$(which less) -s"
-export BROWSER="$PAGER"
-
-export GROFF_NO_SGR=1
-export LESS_TERMCAP_mb=$'\e[01;31m'
-export LESS_TERMCAP_md=$'\e[01;32m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;44;33m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[01;33m'
-export LESS="-r"
-
-export LANG='en_US.UTF-8'
-export LC_ALL='en_US.UTF-8'
-
 if which dircolors > /dev/null 2>&1; then
     eval "$(dircolors -b)"
 fi
@@ -69,8 +45,33 @@ elif [ $(uname) = Darwin ]; then
     if [ -f /opt/local/etc/bash_completion ]; then
         . /opt/local/etc/bash_completion
     fi
-    PATH=/opt/local/bin:/opt/local/sbin:$PATH
+    PATH=/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin:$PATH
 fi
+
+
+# Some env variables
+export PATH=$HOME/bin:$PATH
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/lib/pkgconfig
+export LD_LIBRARY_PATH=${HOME}/lib64:${HOME}/lib
+
+export EDITOR=vim
+export SVN_EDITOR=vim
+export GIT_EDITOR=vim
+export PAGER="$(which less) -s"
+export BROWSER="$PAGER"
+
+export GROFF_NO_SGR=1
+export LESS_TERMCAP_mb=$'\e[01;31m'
+export LESS_TERMCAP_md=$'\e[01;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;44;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[01;33m'
+export LESS="-r"
+
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
