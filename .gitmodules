@@ -38,3 +38,6 @@
     path = configs/vim/bundle/xmledit
     url = git://github.com/sukima/xmledit.git
     ignore = all
+[submodule "configs/vim/bundle/vim-scala"]
+	path = configs/vim/bundle/vim-scala
+	url = https://github.com/derekwyatt/vim-scala.git
