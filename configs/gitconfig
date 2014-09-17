@@ -13,3 +13,6 @@
 	diff = auto
 [core]
 	excludesfile = ~/.gitignore
+[log]
+    date=local
+
