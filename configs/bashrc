@@ -26,8 +26,6 @@ fi
 # standard alias
 if [ $(uname) = Linux ]; then
     alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
     if [ -f /etc/bash_completion ]; then
         . /etc/bash_completion
     fi
@@ -35,15 +33,17 @@ elif [ $(uname) = FreeBSD ]; then
     alias make=gmake
     if which gnuls > /dev/null 2>&1; then
         alias ls='gnuls --color=auto'
-        alias dir='dir --color=auto'
-        alias vdir='vdir --color=auto'
     else
         alias ls='ls -G'
     fi
 elif [ $(uname) = Darwin ]; then
-    alias ls='ls -G'
     if [ -f /opt/local/etc/bash_completion ]; then
         . /opt/local/etc/bash_completion
+    fi
+    if [ -f /opt/local/libexec/gnubin/ls ]; then
+        alias ls='ls --color=auto'
+    else
+        alias ls='ls -G'
     fi
     PATH=/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin:$PATH
 fi

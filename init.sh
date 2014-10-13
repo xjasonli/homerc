@@ -30,5 +30,5 @@ for x in ${SRCDIR}/scripts/*; do
     cp -f $x ${HOME}/bin/
 done
 
-find ${HOME}/.vim -name ".git" -delete
+vim +PluginInstall +qall
 
