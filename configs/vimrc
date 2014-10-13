@@ -9,6 +9,10 @@ set nocompatible
 " Filetype disabled for vundle
 filetype off
 
+" Mapleader
+let mapleader=','
+let g:mapleader=','
+
 if has("win32") || has ('win64')
     let g:vimPath = $HOME . '/vimfiles/'
 else
@@ -190,10 +194,6 @@ if has('unix')
     set path+=/usr/include/c++/**
     set path+=./include,../include
 endif
-
-" Mapping - mapleader
-let mapleader=','
-let g:mapleader=','
 
 " Mapping - quit/save
 nmap <leader>q :qa!<cr>
