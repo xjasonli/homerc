@@ -23,11 +23,11 @@ for x in ${SRCDIR}/configs/*; do
     cp -r $x ${HOME}/.${FILE}
 done
 
-mkdir -p ${HOME}/bin/
+mkdir -p ${HOME}/.bin/
 for x in ${SRCDIR}/scripts/*; do
     FILE=$(basename $x)
-    echo "Copying $x -> ${HOME}/bin/${FILE}"
-    cp -f $x ${HOME}/bin/
+    echo "Copying $x -> ${HOME}/.bin/${FILE}"
+    cp -f $x ${HOME}/.bin/
 done
 
 vim +PluginInstall +qall

@@ -50,7 +50,7 @@ fi
 
 
 # Some env variables
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.bin:$PATH
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/lib/pkgconfig
 export LD_LIBRARY_PATH=${HOME}/lib64:${HOME}/lib
 
@@ -99,30 +99,24 @@ fi
 
 PS1="[${MY_PROMPT}]\$ "
 if which git >/dev/null 2>&1; then
-    parse_git_branch() {
-        if ! git rev-parse --git-dir >/dev/null 2>&1; then
-            return 0
-        fi
+    git_branch() {
         git branch --no-color 2>/dev/null | sed -n '/^\*/s/^\* \(.*\)/ <\1>/p'
     }
-    git_branch_color_begin() {
-        if ! git rev-parse --git-dir >/dev/null 2>&1; then
-            return 0
-        fi
+    git_color_branch() {
         git status 2>/dev/null | grep 'working directory clean' >/dev/null 2>&1
-        if [ "$?" -eq 0 ]; then
-            echo '[0;32m'
+        r0="${PIPESTATUS[0]}" r1="${PIPESTATUS[1]}"
+        if [ "$r0" -ne 0 ]; then
+            return
+        fi
+        if [ "$r1" -eq 0 ]; then
+            echo -n '[0;32m '
         else
-            echo '[0;31m'
+            echo -n '[0;31m '
         fi
-    }
-    git_branch_color_end() {
-        if ! git rev-parse --git-dir >/dev/null 2>&1; then
-            return 0
-        fi
+        echo -n $(git_branch)
         echo '[0m'
     }
-    PS1="[${MY_PROMPT}\[\$(git_branch_color_begin)\]\$(parse_git_branch)\[\$(git_branch_color_end)\]]\$ "
+    PS1="[${MY_PROMPT}\$(git_color_branch)]\$ "
 fi
 unset MY_PROMPT
 
