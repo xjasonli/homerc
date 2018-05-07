@@ -50,7 +50,7 @@ fi
 
 
 # Some env variables
-export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/.bin:$HOME/bin:$PATH
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/lib/pkgconfig
 export LD_LIBRARY_PATH=${HOME}/lib64:${HOME}/lib
 
