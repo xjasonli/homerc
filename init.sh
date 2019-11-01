@@ -14,7 +14,9 @@ else
 fi
 
 cd ${SRCDIR}
-git submodule update --init
+#git submodule update --init
+#curl -fLo configs/vim/autoload/plug.vim --create-dirs \
+#        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 for x in ${SRCDIR}/configs/*; do
     FILE=$(basename $x)
@@ -29,6 +31,4 @@ for x in ${SRCDIR}/scripts/*; do
     echo "Copying $x -> ${HOME}/.bin/${FILE}"
     cp -f $x ${HOME}/.bin/
 done
-
-vim +PluginInstall +qall
 
