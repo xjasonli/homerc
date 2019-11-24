@@ -30,10 +30,10 @@ call plug#begin(g:vimPath . 'plugged')
 Plug 'gmarik/Vundle.vim'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'vim-scripts/a.vim'
-Plug 'vim-scripts/cscope.vim'
+"Plug 'vim-scripts/cscope.vim'
 Plug 'majutsushi/tagbar'
-Plug 'derekwyatt/vim-scala'
-Plug 'fatih/vim-go'
+"Plug 'derekwyatt/vim-scala'
+"Plug 'fatih/vim-go'
 Plug 'sukima/xmledit'
 call plug#end()
 
