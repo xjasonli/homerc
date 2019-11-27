@@ -6,9 +6,6 @@
 " No Vi-compatible
 set nocompatible
 
-" Filetype disabled for vundle
-filetype off
-
 " Mapleader
 let mapleader=','
 let g:mapleader=','
@@ -27,13 +24,9 @@ endif
 
 " Plugins managed by vim-plug
 call plug#begin(g:vimPath . 'plugged')
-Plug 'gmarik/Vundle.vim'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'vim-scripts/a.vim'
-"Plug 'vim-scripts/cscope.vim'
 Plug 'majutsushi/tagbar'
-"Plug 'derekwyatt/vim-scala'
-"Plug 'fatih/vim-go'
 Plug 'sukima/xmledit'
 call plug#end()
 
