@@ -4,3 +4,6 @@ Host *
 Host *.DOMAIN_BEHIND_PROXY
     ProxyCommand ncat --proxy-type=socks5 --proxy=localhost %h %p
 
+Host github.com
+    #ProxyCommand ncat --proxy-type=socks5 --proxy=localhost %h %p
+
