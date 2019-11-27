@@ -15,4 +15,5 @@
 	excludesfile = ~/.gitignore
 [log]
     date=local
-
+[push]
+	default = current
