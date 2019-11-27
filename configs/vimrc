@@ -266,6 +266,7 @@ augroup filetype
     au! BufRead,BufNewFile *.ipp set filetype=cpp
 augroup end
 
+au BufRead,BufNewFile *.json,*.yaml,*.xml set sw=2 ts=2 sts=2 et
 au BufRead,BufNewFile *.scala,*.sbt set filetype=scala
 au BufRead,BufNewFile * call s:DetectScala()
 
