@@ -13,10 +13,7 @@ else
     exit 1
 fi
 
-cd ${SRCDIR}
-#git submodule update --init
-#curl -fLo configs/vim/autoload/plug.vim --create-dirs \
-#        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+chmod 700 ${SRCDIR}/home/ssh
 
 for x in ${SRCDIR}/home/*; do
     FILE=$(basename $x)
