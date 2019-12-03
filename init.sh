@@ -14,6 +14,7 @@ else
 fi
 
 chmod 700 ${SRCDIR}/home/ssh
+chmod 600 ${SRCDIR}/home/ssh/*
 
 for x in ${SRCDIR}/home/*; do
     FILE=$(basename $x)
