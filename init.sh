@@ -18,17 +18,12 @@ cd ${SRCDIR}
 #curl -fLo configs/vim/autoload/plug.vim --create-dirs \
 #        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-for x in ${SRCDIR}/configs/*; do
+for x in ${SRCDIR}/home/*; do
     FILE=$(basename $x)
-    rm -rf ${HOME}/.${FILE}
-    echo "Copying $x -> ${HOME}/.${FILE}"
-    cp -r $x ${HOME}/.${FILE}
-done
-
-mkdir -p ${HOME}/.bin/
-for x in ${SRCDIR}/scripts/*; do
-    FILE=$(basename $x)
-    echo "Copying $x -> ${HOME}/.bin/${FILE}"
-    cp -f $x ${HOME}/.bin/
+    if [ -d $x ]; then
+        x="$x/"
+    fi
+    echo "rsync -av $x ${HOME}/.${FILE}"
+    rsync -a "$x" "${HOME}/.${FILE}"
 done
 
