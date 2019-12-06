@@ -52,6 +52,9 @@ case "${UNAME}" in
         else
             alias ls='ls -G'
         fi
+        if which gsed > /dev/null 2>&1; then
+            alias sed='gsed'
+        fi
         PATH=/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin:$PATH
         ;;
     *)
