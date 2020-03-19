@@ -1,5 +1,6 @@
 Host *
     GSSAPIAuthentication no
+    HashKnownHosts no
 
 Host *.DOMAIN_BEHIND_PROXY
     ProxyCommand ncat --proxy-type=socks5 --proxy=localhost %h %p
