@@ -1,5 +1,4 @@
 Host *
-    GSSAPIAuthentication no
     HashKnownHosts no
 
 Host *.DOMAIN_BEHIND_PROXY
