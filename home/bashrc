@@ -69,7 +69,7 @@ export LD_LIBRARY_PATH=${HOME}/lib64:${HOME}/lib
 export EDITOR=vim
 export SVN_EDITOR=vim
 export GIT_EDITOR=vim
-export PAGER="$(which less) -s"
+export PAGER="$(which less)"
 export BROWSER="$PAGER"
 
 export GROFF_NO_SGR=1
