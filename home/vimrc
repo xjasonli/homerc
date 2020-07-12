@@ -28,6 +28,7 @@ Plug 'fholgado/minibufexpl.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'majutsushi/tagbar'
 Plug 'sukima/xmledit'
+Plug 'jparise/vim-graphql'
 call plug#end()
 
 " Plugin - minibufexpl
