@@ -86,9 +86,11 @@ export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
 export GOPATH=${HOME}/.go
+export PATH=${GOPATH}/bin:${PATH}
 if [ ! -e ${GOPATH}/src ]; then
     mkdir -p ${HOME}/dev && mkdir -p ${GOPATH} && ln -s ../dev ${GOPATH}/src
 fi
+export PATH=${HOME}/.local/bin:${PATH}
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
