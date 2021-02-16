@@ -8,6 +8,8 @@ elif [ $UNAME = FreeBSD ]; then
     SRCDIR=$(dirname "$(realpath "$0")")
 elif [ $UNAME = Darwin ]; then
     SRCDIR=$(cd "$(dirname "$0")"; pwd)
+elif [[ $UNAME == MSYS* ]]; then
+    SRCDIR=$(dirname "$(readlink -f "$0")")
 else
     echo "Unknown platform"
     exit 1
