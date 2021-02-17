@@ -1,19 +1,22 @@
 [user]
-	name = Li Xinjie
-	email = xjason.li@gmail.com
+    name = Li Xinjie
+    email = xjason.li@gmail.com
 [alias]
-	st = status
-	ci = commit
-	co = checkout
-	br = branch
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
 [color]
-	branch = auto
-	interactive = auto
-	status = auto
-	diff = auto
+    branch = auto
+    interactive = auto
+    status = auto
+    diff = auto
 [core]
-	excludesfile = ~/.gitignore
+    excludesfile = ~/.gitignore
 [log]
     date=local
 [push]
-	default = current
+    default = current
+[pull]
+    ff = only
+
