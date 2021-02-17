@@ -29,6 +29,10 @@ fi
 # standard alias
 UNAME=$(uname | tr '[:upper:]' '[:lower:]') 
 case "${UNAME}" in
+    msys*)
+        ;&
+    mingw*)
+        ;&
     linux)
         alias ls='ls --color=auto'
         if [ -f /etc/bash_completion ]; then
