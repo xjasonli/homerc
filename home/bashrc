@@ -124,7 +124,7 @@ if which git >/dev/null 2>&1; then
             return
         fi
         if [ "$r1" -eq 0 ]; then
-            echo -n '[03;32m '
+            echo -n '[00;32m '
         else
             echo -n '[00;31m '
         fi
