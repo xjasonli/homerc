@@ -29,10 +29,9 @@ fi
 # standard alias
 UNAME=$(uname | tr '[:upper:]' '[:lower:]') 
 case "${UNAME}" in
-    msys*)
-        ;&
-    mingw*)
-        ;&
+    msys*|mingw*)
+        export MSYS=winsymlinks:nativestrict
+        ;;
     linux)
         alias ls='ls --color=auto'
         if [ -f /etc/bash_completion ]; then
