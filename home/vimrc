@@ -29,6 +29,12 @@ Plug 'vim-scripts/a.vim'
 Plug 'majutsushi/tagbar'
 Plug 'sukima/xmledit'
 Plug 'jparise/vim-graphql'
+Plug 'udalov/kotlin-vim'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
+Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
+Plug 'fatih/vim-go'
 call plug#end()
 
 " Plugin - minibufexpl
@@ -49,6 +55,14 @@ let g:alternateExtensions_m="h"
 " Plugin - TagBar
 nmap <leader>t :TagbarToggle<cr>
 
+" Plugin - dart-vim-plugin
+let dart_html_in_string=v:true
+let g:dart_style_guide=2
+let g:dart_format_on_save=0
+
+" Plugin - vim-lsc
+let g:lsc_auto_map=v:true
+
 " Filetype detecting
 filetype plugin indent on
 
@@ -60,7 +74,7 @@ if has("win32") || has("win64")
     set encoding=chinese
     set fileencoding=chinese
 elseif has("win32unix")         " Cygwin
-    set encoding=utf8
+    set encoding=utf-8
     set fileencoding=utf-8
 else
     set encoding=utf-8
@@ -183,6 +197,7 @@ if has('gui_running')
     set guioptions-=m
     set guioptions-=T
     set t_Co=256
+    call FlutterMenu()
 endif
 
 " Search paths
@@ -263,8 +278,10 @@ endif
 " Other filetypes
 augroup filetype
     au! BufRead,BufNewFile *.thrift set filetype=thrift
-    au! BufRead,BufNewFile *.proto set filetype=proto
+    au! BufRead,BufNewFile *.proto set filetype=proto ts=4 sw=4 noet
     au! BufRead,BufNewFile *.ipp set filetype=cpp
+    "au! BufRead,BufNewFile *.kt set ts=2 sw=2
+    au! BufRead,BufNewFile *.dart set ts=2 sw=2
 augroup end
 
 au BufRead,BufNewFile *.json,*.yaml,*.xml set sw=2 ts=2 sts=2 et

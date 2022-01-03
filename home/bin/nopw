@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ ! -f ~/.ssh/id_rsa.pub ]; then
+    ssh-keygen
+fi
+
+DATA=$(cat ~/.ssh/id_rsa.pub)
+
+ssh $1 "mkdir -p ~/.ssh; touch ~/.ssh/authorized_keys; chmod 700 ~/.ssh; chmod 600 ~/.ssh/authorized_keys; echo "$DATA" >> ~/.ssh/authorized_keys"
+

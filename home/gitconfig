@@ -1,5 +1,5 @@
 [user]
-    name = Li Xinjie
+	name = Jason Li
     email = xjason.li@gmail.com
 [alias]
     st = status
@@ -18,5 +18,10 @@
 [push]
     default = current
 [pull]
-    ff = only
+    rebase = true
 
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

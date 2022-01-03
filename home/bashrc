@@ -31,6 +31,30 @@ _UNAME=$(uname | tr '[:upper:]' '[:lower:]')
 case "${_UNAME}" in
     msys*|mingw*)
         export MSYS=winsymlinks:nativestrict
+        alias ps='procps'
+        if [ ! -e "$HOME/.pub-cache" ]; then
+            ln -Tsf "$HOME/AppData/Local/Pub/Cache" "$HOME/.pub-cache"
+        fi
+        # done
+        PATH=${PATH}:"/c/Program Files (x86)/Nmap"
+        PATH="${HOME}/tools/depot_tools":${PATH}
+        PATH="$PATH:$HOME/.pub-cache/bin:$HOME/AppData/Local/Pub/Cache/bin"
+        DISPLAY=localhost:0.0
+
+        command_not_found_handle() {
+            _cnfh_fname=$(basename "$1")
+            _cnfh_fext=$(echo "${_cnfh_fname##*.}" | tr '[A-Z]' '[a-z]')
+            if [ "$_cnfh_fext" != "bat" ]; then
+                _cnfh_fbat=${_cnfh_fname}.bat
+                if type "$_cnfh_fbat" >/dev/null 2>&1; then
+                    shift
+                    "$_cnfh_fbat" "$@"
+                    return $?
+                fi
+            fi
+            echo "bash: $1: command not found" >&2
+            return 127
+        }
         ;;
     linux)
         alias ls='ls --color=auto'
@@ -94,13 +118,14 @@ if [ ! -e ${GOPATH}/src ]; then
     mkdir -p ${HOME}/dev && mkdir -p ${GOPATH} && ln -s ../dev ${GOPATH}/src
 fi
 export PATH=${HOME}/.local/bin:${PATH}
+export PATH=${HOME}/.cargo/bin:${PATH}
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias l='ls -l'
 alias ll='ls -l'
-alias sudo='sudo -E'
+#alias sudo='sudo -E'
 alias t='tmux new -AD -s default'
 
 case "${_UNAME}" in
@@ -173,6 +198,4 @@ fi
 
 # cleaning up
 unset _UNAME
-
-# done
 
